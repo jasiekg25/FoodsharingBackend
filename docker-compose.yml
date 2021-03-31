@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  database:
+    container_name: foodsharing_backend
+    image: postgres:latest
+    env_file: database.conf
+    ports:
+     - 5432:5432
+    volumes:
+      - db_volume:/var/lib/postgresql
   app:
     build:
       context: .
@@ -8,3 +16,6 @@ services:
       - 5000:5000
     volumes:
       - ./FoodsharingBackend:/FoodsharingBackend
+      
+volumes:
+  db_volume:
