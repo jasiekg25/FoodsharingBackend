@@ -1,13 +1,16 @@
 FROM alpine:3.12
-WORKDIR /app
 
-COPY requirements.txt requirements.txt
+# copy everything from our directory to new directory in container
+COPY FoodsharingBackend /FoodsharingBackend
 
-RUN apk add python3 && apk add py3-pip
-RUN pip3 install --upgrade pip
+# moving to directory in container
+WORKDIR /FoodsharingBackend
 
+# prep install
+RUN apk add python3 && apk add py3-pip && pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
-COPY . .
+EXPOSE 5000
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+# running command
+CMD ["python3", "run.py"]
