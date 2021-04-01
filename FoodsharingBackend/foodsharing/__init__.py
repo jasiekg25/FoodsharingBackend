@@ -16,8 +16,10 @@ def create_app(config_class=Config):
     
     # import blueprints
     from .views.home import home
+    from .views.auth import auth
     
     # register blueprints
     app.register_blueprint(home, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/")
 
     return app
